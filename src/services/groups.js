@@ -1,7 +1,10 @@
 import groupDB from "../database/memory.js";
+import  { Model } from "../lib/model.js"
+
+const model=Model();
 
 const getAll=()=>{
-    const orderGroups=groupDB.sort(function (a, b) {
+    const orderGroups=model.getAll().sort(function (a, b) {
         if (a.id < b.id) {
           return 1;
         }
@@ -12,9 +15,9 @@ const getAll=()=>{
       return orderGroups;
     }
 
-const get=(id)=>{
+const getById=(id)=>{
   /*  const groupId=parseInt(req.params.id); */
-      const foundGroup=groupDB.find(group=>group.id === id);
+      const foundGroup=model.getById(id);
       /* console.log(res.json); */
       /* return res.json(foundGroup); */
       return foundGroup;
@@ -24,31 +27,42 @@ const create=(newGroup)=>{
   /* console.log(newGroup) */
   /* console.info(req.body)
   const group=req.body; */
-  const groupId=newGroup.id;
+
   console.log("estoy creando el grupo")
   
+  const alreadyThere=model.getByName(newGroup.name);
 
-  const alreadyThere=groupDB.some(group=>group.id===groupId);
+  console.log(newGroup.name);
+  console.log(alreadyThere);
   if(alreadyThere){
       /* res.status(409); */
       /* res.json("El nombre del grupo ya existe") */
       return false;
   }
-  groupDB.push({
-      id:newGroup.id,
-      name:newGroup.name,
-      color:newGroup.color,
-      state:newGroup.state,
-  });
-  console.log(groupDB)
+  const group = model.create(newGroup);
+  console.log(newGroup)
   /* res.status(201).json(group); */
-  return newGroup;
+  return group;
+}
 
+const update=(group)=>{
+  const groupUpdate=model.update(group.id, group);
+  if(groupUpdate){
+    return group;
+  }else{
+    return null;
+  }
+}
+
+const del=(id)=>{
+   return model.delete(id);
 }
  
 export default {
   getAll,
-  get,
-  create
+  getById,
+  create,
+  update,
+  delete:del
 }      
   

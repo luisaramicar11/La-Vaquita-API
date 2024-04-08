@@ -6,7 +6,7 @@ const router=express.Router();
 router.get("/groups", groupController.getAll);
 router.get("/groups/:id", groupController.get);
 router.post("/groups", groupController.create);
-/* router.put("/groups/", groupService.updateGroup);
-router.delete("/groups", groupService.deleteGroup); */
+router.put("/groups/:id", groupController.update);
+router.delete("/groups/:id", groupController.delete);
 
 export {router};
