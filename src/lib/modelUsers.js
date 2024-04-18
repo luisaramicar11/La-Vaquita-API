@@ -1,45 +1,40 @@
-const Model = () => {
+const ModelUsers = () => {
   const entities = [
     {
       id:1,
-      name:"1",
-      color:"#A65293",
-      state:{oweMe:0, owe:100},
+      name:"jorge",
+      email:"jorge@gmail.com",
+      password:"123",
+      fechaCreacion:"2023/01/12"
   },{
       id:2,
-      name:"2",
-      color:"#A65293",
-      state:{oweMe:0, owe:200},
+      name:"ana",
+      email:"ana@gmail.com",
+      password:"123",
+      fechaCreacion:"2023/01/12"
   },
   {   id:3,
-      name:"3",
-      color:"#A65293",
-      state:{oweMe:0, owe:0},
+      name:"sergio",
+      email:"sergio@gmail.com",
+      password:"123",
+      fechaCreacion:"2023/01/12"
   },
   ];
 
-  console.log(4, "[Group] Model");
 
   const getById = (id) => {
-    console.log(4.1, "[Database] Model findUnique");
-
     return entities.find((entity) => entity.id === id);
   };
 
   const getByName = (name) => {
-    console.log(4.1, "[Database] Model findUnique");
-
     return entities.find((entity) => entity.name.toLocaleLowerCase() === name.toLocaleLowerCase());
   };
 
   const getAll = () => {
-    console.log(4.1, "[Database] Model findMany");
-
     return entities;
   };
 
   const create = (entity) => {
-    console.log(4.1, "[Database] Model create");
 
     const maxId = entities.reduce((max, { id }) => Math.max(max, id), 0);
     const newId = (maxId + 1).toString();
@@ -53,8 +48,7 @@ const Model = () => {
   };
 
   const update = (id, newEntity) => {
-    console.log(4.1, "[Database] Model update");
-
+  
     const entityIndex = entities.findIndex((entity) => entity.id === id);
 
     if (entityIndex !== -1) {
@@ -67,7 +61,6 @@ const Model = () => {
   };
 
   const del = (id) => {
-    console.log(4.1, "[Database] Model delete");
 
     const entityIndex = entities.findIndex((entity) => entity.id === id);
 
@@ -90,4 +83,4 @@ const Model = () => {
   };
 };
 
-export { Model };
+export { ModelUsers };

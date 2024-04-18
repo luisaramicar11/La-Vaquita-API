@@ -1,4 +1,3 @@
-import groupDB from "../database/memory.js";
 import  { Model } from "../lib/model.js"
 
 const model=Model();
