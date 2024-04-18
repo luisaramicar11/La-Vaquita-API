@@ -21,7 +21,7 @@ const create=(req, res)=>{
         return res.status(400).json({message:"El nombre del usuario no debe superar los 100 caracteres"})
     }else if(!newUser?.name){
         return res.status(400).json({message:"El usuario debe tener un nombre"})
-    }else if(!(/a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(newUser?.password))){
+    }else if(!(/a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(newUser?.email))){
         return res.status(400).json({message:"El correo debe tener un formato válido"})
     }
     console.log(req.body);

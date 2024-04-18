@@ -8,7 +8,7 @@ const getAll=(req, res)=>{
 const get = (req, res) =>{
     const groupId=parseInt(req.params.id);
     const group=groupService.getById(groupId);
-    if(group == null || group == undefined){
+    if(group === null || group === undefined){
         res.status(404);
         return;
     }
@@ -19,8 +19,7 @@ const create=(req, res)=>{
     const newGroup=req.body;
     if(!newGroup?.color){
         newGroup.color="#A65293";
-    }
-    if(newGroup?.name && newGroup?.name.length>30){
+    }else if(newGroup?.name.length>30){
         return res.status(400).json({message:"El nombre del grupo no debe superar los 30 caracteres"})
     }else if(!newGroup?.name){
         return res.status(400).json({message:"El grupo debe tener un nombre"})
