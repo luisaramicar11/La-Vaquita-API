@@ -1,11 +1,11 @@
 import groupService from "../services/groups.js"
 
-const getAll=(req, res)=>{
+const getAll= async(req, res)=>{
     const groups=groupService.getAll();
     res.json(groups);
   }
 
-const get = (req, res) =>{
+const get = async(req, res) =>{
     const groupId=parseInt(req.params.id);
     const group=groupService.getById(groupId);
     if(group === null || group === undefined){
@@ -15,7 +15,7 @@ const get = (req, res) =>{
     res.status(200).json(group);
 }  
 
-const create=(req, res)=>{
+const create=async(req, res)=>{
     const newGroup=req.body;
     if(!newGroup?.color){
         newGroup.color="#A65293";
@@ -32,7 +32,7 @@ const create=(req, res)=>{
     res.status(201).json(createGroup);
  }
 
- const update=(req, res)=>{
+ const update=async(req, res)=>{
     const groupUpdate=req.body;
     const createGroup=groupService.update(groupUpdate);
     if(createGroup===null){
@@ -41,7 +41,7 @@ const create=(req, res)=>{
     res.status(200).json(createGroup)
  }
 
- const del=(req, res)=>{
+ const del=async(req, res)=>{
     const groupId=parseInt(req.params.id);
     const group=groupService.delete(groupId);
     if(group){
